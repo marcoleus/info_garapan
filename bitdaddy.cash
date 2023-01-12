@@ -8,10 +8,10 @@ $u_a=save("useragent");
 $u_c=save("cookie");
 
 function sl($x,$data=0){
-if($x==0){$r=run(host."shortlinks.html",hmc());}
-elseif($x==1){$r=run($data,hmc(1));}
-elseif($x==2){$r=run(host."system/libs/captcha/request.php",hmc(1),$data);}
-elseif($x==3){$r=run(host."system/ajax.php",hmc(1),$data);}
+if($x==0){$r=curlx(host."shortlinks.html",hmc());}
+elseif($x==1){$r=curlx($data,hmc(1));}
+elseif($x==2){$r=curlx(host."system/libs/captcha/request.php",hmc(1),$data);}
+elseif($x==3){$r=curlx(host."system/ajax.php",hmc(1),$data);}
 
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#text-success">(.*?)<#is',$r,$u);
