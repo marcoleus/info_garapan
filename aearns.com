@@ -8,7 +8,7 @@ error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m"
 DATA:
 $u_a=save("useragent");
 $u_c=save("cookie");
-sl();
+
 function sl($byp=0){if($byp){$r=curl($byp,hmc())[1];}else{$r=curl(host."links",hmc())[1];}
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#font-medium">(.*?)<#is',$r,$u);
