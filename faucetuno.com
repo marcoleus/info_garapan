@@ -1,11 +1,11 @@
 <?php
 
 eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
-error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://faucetuno.com/",sc="faucetuno";$disable="n";
+error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://faucetuno.com/",sc="faucetuno";$asu="cookie_".explode("/",host)[2];$disable="n";
 
 DATA:
 $u_a=save("useragent");
-$u_c=save("cookie");
+$u_c=save($asu);
 
 function sl($byp=0){if($byp){$r=curl($byp,hmc())[1];}else{$r=curl(host."links",hmc())[1];}
 preg_match("#Just a moment#is",$r,$cf);
@@ -30,7 +30,7 @@ function wd($r,$coin){$data=http_build_query(["csrf_token_name"=>$r["csrf"],"tok
 return curl(host."withdraw",hmc(),$data)[1];}
 
 $r=dashboard();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
 
 menu:
 ket(1,"shorlink",2,"withdrawal");
@@ -50,7 +50,7 @@ if($s[1]=='Success!'){print h.$s[1]." ".$s1[1].n;line();goto menu;}else{print m.
 
 shorlink:
 while(true){$r=sl();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){print m."bypass all shorlink fly family success".n;goto menu;}
 $go=curl($re["go"],hmc());
