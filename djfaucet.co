@@ -5,7 +5,7 @@ error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m"
 
 DATA:
 $u_a=save("useragent");
-$u_c=save("cookie");
+$u_c=save($asu);
 
 function sl($byp=0){
 if($byp){$r=curl($byp,hmc())[1];}else{$r=curl(host."dashboard/link",hmc())[1];}
@@ -20,12 +20,12 @@ return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>trim($u[1]),"balance"=>$bal,"
 
 
 $r=sl();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
 
 
 shorlink:
 while(true){$r=sl();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){die(m."bypass all shorlink fly family success".n);}
 
