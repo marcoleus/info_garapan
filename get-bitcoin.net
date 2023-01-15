@@ -28,7 +28,7 @@ if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif(
 shorlink:$x=-1;$r=sl(0);
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
-if($re["data"]==null){print m."bypass all shorlink fly family success".n;tmr(1,60*60*24);goto shorlink;}
+if($re["data"]==null){print m."bypass all shorlink fly family success".n;24();goto shorlink;}
 
 $data=http_build_query(["cID"=>0,"rT"=>1,"tM"=>"light"]);
 $ic=sl(2,$data);
