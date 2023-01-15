@@ -89,7 +89,7 @@ shorlink:
 while(true){$r=sl(0);
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find(str_replace(".INC (5 Steps)","",$r["host"]),$r["go"],$r["left"]);
-if($re["data"]==null){print m."bypass all shorlink fly family success".n;24();goto shorlink;}
+if($re["data"]==null){print m."bypass all shorlink fly family success".n;t24();goto shorlink;}
 $data=http_build_query(["a"=>"getShortlink","data"=>$re["data"],"token"=>$r["token"]]);
 $go=sl(2,$data)["links"];
 if($go){$link=valid($go);
