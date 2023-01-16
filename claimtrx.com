@@ -28,7 +28,7 @@ $r=curl(host."auto".$v,hmc(),$data)[1];
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#token" value="(.*?)"#is',$r,$t);
 preg_match('#let timer = (.*?),#is',$r,$tmr);
-return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"token"=>$t[1],"time"=>$tmr[1]];}
+return ["res"=>$r,"cloudflare"=>$cf[0],"token"=>$t[1],"time"=>$tmr[1]];}
 
 
 
@@ -47,7 +47,7 @@ $r1=auto(http_build_query(["token"=>$r["token"]]))["res"];
 preg_match("#title: '(.*?)'#is",$r1,$n);
 preg_match("#text: '(.*?)'#is",$r1,$rw);
 if($n[1]=='Good job!'){
-print h.$s[1]." ".$rw[1].n;line();
+print h.$n[1]." ".$rw[1].n;line();
 }}else{print m."sorry no energy".n;goto menu;}}
 
 shorlink:
