@@ -57,7 +57,7 @@ if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){print m."bypass all shorlink fly family success".n;goto menu;}
 $go=curl($re["go"],hmc());
-$link=valid($go[0]);
+$link=valid($go[1]);
 if($link==0){goto shorlink;}
 $r1=sl($link)["res"];
 preg_match("#title: '(.*?)'#is",$r1,$n);
