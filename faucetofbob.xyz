@@ -1,5 +1,6 @@
 <?php
 
+
 eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
 error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://faucetofbob.xyz/",sc="faucetofbob";$asu="cookie_".explode("/",host)[2];
 $disable=["n"];
@@ -13,7 +14,6 @@ if($x==0){$r=curlx(host."shortlinks.html",hmc());}
 elseif($x==1){$r=curlx($data,hmc(1));}
 elseif($x==2){$r=curlx(host."system/libs/captcha/request.php",hmc(1),$data);}
 elseif($x==3){$r=curlx(host."system/ajax.php",hmc(1),$data);}
-//die(file_put_contents("aku.html",$r));
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#text-success">(.*?)<#is',$r,$u);
 preg_match('#balance"><b>(.*?)<#is',$r,$b);
@@ -21,16 +21,51 @@ preg_match('#text-warning"><b>(.*?)<#is',$r,$b1);
 preg_match("#([a-z0-9]{64})#is",$r,$t);
 preg_match('#success mt-0" role="alert">(.*?)<#is',$r,$n);
 preg_match_all('#align-middle">(.*?)</td>(.*?)<td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td>(.*?)<td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td>(.*?)<td class="align-middle text-center"><button onclick="(.*?)" class=#is',$r,$tes);
-return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1].$b[2].$b[3]." and ".$b1[1],"token"=>$t[1],"host"=>$tes[1],"left"=>$tes[5],"go"=>$tes[7],"links"=>json_decode($r)->shortlink,"notif"=>$n[1],"antibot"=>explode('"',$r)];}
+return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1]." and ".$b1[1],"token"=>$t[1],"host"=>$tes[1],"left"=>$tes[5],"go"=>$tes[7],"links"=>json_decode($r)->shortlink,"notif"=>$n[1],"antibot"=>explode('"',$r)];}
+
+
+function ptc($x,$data=0){
+if($x==0){$r=curlx(host."ptc.html",hmc());}
+elseif($x==1){$r=curlx($data,hmc());}
+elseif($x==2){$r=curlx(host."system/libs/captcha/request.php",hmc(1),$data);}
+elseif($x==3){$r=curlx(host."system/ajax.php",hmc(1),$data);}
+preg_match("#Just a moment#is",$r,$cf);
+preg_match('#text-success">(.*?)<#is',$r,$u);
+preg_match('#balance"><b>(.*?)<#is',$r,$b);
+preg_match('#text-warning"><b>(.*?)<#is',$r,$b1);
+preg_match("#([a-z0-9]{64})#is",$r,$t);
+preg_match('#text-dark" id="(.*?)"#is',$r,$sid);
+preg_match('#var secs = (.*?);#is',$r,$tm);
+preg_match("#SUCCESS<\\\/b> (.*?)<#is",$r,$rw);
+$surf=ex("open(base + '/","',",1,$r);
+return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1]." and ".$b1[1],"token"=>$t[1],"time"=>$tm[1],"surf"=>$surf,"sid"=>$sid[1],"antibot"=>explode('"',$r),"notif"=>$rw[1]];}
+
+
+
 
 $r=sl(0);
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
+
+
+
+ptc:$x=-1;$r=ptc(0);if($r["sid"]==null){goto shorlink;}
+$r1=ptc(1,host.str_replace("' + a + '",$r["sid"],$r["surf"]));L($r1["time"]);
+$data=http_build_query(["cID"=>0,"rT"=>1,"tM"=>"light"]);
+$ic=ptc(2,$data);
+xxnxid:
+while(true){$x++; $x=$x+1;
+If($x==11){goto xxnxid;}
+$data=http_build_query(["cID"=>0,"pC"=>$ic["antibot"][$x],"rT"=>2]);
+ptc(2,$data)["res"];
+$data=http_build_query(["a"=>"proccessPTC","data"=>$r["sid"],"token"=>$r1["token"],"captcha-idhf"=>0,"captcha-hf"=>$ic["antibot"][$x]]);
+$rw=ptc(3,$data)["notif"];
+if($rw){print h.$rw.n;line();goto ptc;}}
+
 
 shorlink:$x=-1;$r=sl(0);
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){print m."bypass all shorlink fly family success".n;t24();goto shorlink;}
-
 $data=http_build_query(["cID"=>0,"rT"=>1,"tM"=>"light"]);
 $ic=sl(2,$data);
 xxnxcom:
@@ -48,6 +83,4 @@ $go=sl(3,$data)["links"];
 if($go){$link=valid($go);
 if($link==0){goto shorlink;}
 $rw=sl(1,$link)["notif"];
-if($rw){print h.$rw.n;line().ket("balance",sl(0)["balance"]).line();goto shorlink;}else{print m."invalid key";r();goto shorlink;}}}
-
-
+if($rw){print h.$rw.n;line().ket("balance",sl(0)["balance"]).line();goto shorlink;}else{print m."invalid key";r();goto ptc;}}}
