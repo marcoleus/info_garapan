@@ -7,7 +7,7 @@ $disable=["clicksfly"];
 DATA:
 $u_a=save("useragent");
 $u_c=save($asu);
-sl();
+
 function sl($byp=0){if($byp){$r=curl($byp,hmc())[1];}else{$r=curl(host."links",hmc())[1];}
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#key="t-henry">(.*?)<#is',$r,$u);
