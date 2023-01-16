@@ -33,7 +33,7 @@ preg_match('#let timer = (.*?),#is',$r,$tmr);
 return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"token"=>$t[1],"time"=>$tmr[1]];}
 
 $r=dashboard();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"],"energy",$r["energy"]).line();
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"],"energy",$r["energy"]).line();
 
 menu:
 ket(1,"auto faucet",2,"shorlink");
@@ -42,7 +42,7 @@ if($pil==1){goto auto;}elseif($pil==2){goto shorlink;}else{goto menu;}
 
 auto:
 while(true){$r=auto();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 if($r["time"]){tmr(2,$r["time"]);
 $r1=auto(http_build_query(["token"=>$r["token"]]))["res"];
 preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1,$s);
@@ -50,7 +50,7 @@ if($s[2]=="Good job!"){print h.$s[2]." ".$s[3].n;line();}}else{print m."sorry no
 
 shorlink:
 while(true){$r=sl();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){print m."bypass all shorlink fly family success".n;goto menu;}
 $go=curl($re["go"],hmc());
