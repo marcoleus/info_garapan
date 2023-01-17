@@ -3,7 +3,7 @@
 eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
 error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://faucetspeedbtc.com/",sc="faucetspeedbtc";
 $asu="cookie_".explode("/",host)[2];
-$disable=["n"];
+$disable=["nn"];
 
 DATA:
 $u_a=save("useragent");
