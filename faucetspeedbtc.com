@@ -7,7 +7,7 @@ $disable=["nn"];
 
 DATA:
 $u_a=save("useragent");
-$u_c=save("cookie");
+$u_c=save($asu);
 
 function sl($byp=0){if($byp){$r=curl($byp,hmc())[1];}else{$r=curl(host."links",hmc())[1];}
 preg_match("#Just a moment#is",$r,$cf);
