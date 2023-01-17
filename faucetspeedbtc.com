@@ -1,7 +1,8 @@
 <?php
 
 eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
-error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://faucetspeedbtc.com/",sc="faucetspeedbtc";
+error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://faucetspeedbtc.com/",sc="faucetspeedbtc";
+$asu="cookie_".explode("/",host)[2];
 $disable=["n"];
 
 DATA:
@@ -19,12 +20,12 @@ return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1],"go"=>
 
 
 $r=sl();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
 
 
 shorlink:
 while(true){$r=sl();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink('Cookie');goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink('Cookie');goto DATA;}
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){die(m."bypass all shorlink fly family success".n);}
 $go=curl($re["go"],hmc());
