@@ -48,7 +48,7 @@ if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif(
 
 
 
-ptc:$x=-1;$r=ptc(0);if($r["sid"]==null){goto shorlink;}
+ptc:$x=-1;$r=ptc(0);if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif($r["sid"]==null){goto shorlink;}
 $r1=ptc(1,host.str_replace("' + a + '",$r["sid"],$r["surf"]));L($r1["time"]);
 $data=http_build_query(["cID"=>0,"rT"=>1,"tM"=>"light"]);
 $ic=ptc(2,$data);
@@ -73,12 +73,7 @@ while(true){$x++; $x=$x+1;
 If($x==11){goto xxnxcom;}
 $data=http_build_query(["cID"=>0,"pC"=>$ic["antibot"][$x],"rT"=>2]);
 sl(2,$data)["res"];
-$data=http_build_query([
-"a"=>"getShortlink",
-"data"=>$re["data"],
-"token"=>$r["token"],
-"captcha-idhf"=>0,
-"captcha-hf"=>$ic["antibot"][$x]]);
+$data=http_build_query(["a"=>"getShortlink","data"=>$re["data"],"token"=>$r["token"],"captcha-idhf"=>0,"captcha-hf"=>$ic["antibot"][$x]]);
 $go=sl(3,$data)["links"];
 if($go){$link=valid($go);
 if($link==0){goto shorlink;}
