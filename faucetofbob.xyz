@@ -34,11 +34,11 @@ preg_match('#text-success">(.*?)<#is',$r,$u);
 preg_match('#balance"><b>(.*?)<#is',$r,$b);
 preg_match('#text-warning"><b>(.*?)<#is',$r,$b1);
 preg_match("#([a-z0-9]{64})#is",$r,$t);
-preg_match('#text-dark" id="(.*?)"#is',$r,$sid);
+preg_match("#opensite(.*?)',#is",$r,$sid);
 preg_match('#var secs = (.*?);#is',$r,$tm);
 preg_match("#SUCCESS<\\\/b> (.*?)<#is",$r,$rw);
 $surf=ex("open(base + '/","',",1,$r);
-return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1]." and ".$b1[1],"token"=>$t[1],"time"=>$tm[1],"surf"=>$surf,"sid"=>$sid[1],"antibot"=>explode('"',$r),"notif"=>$rw[1]];}
+return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1]." and ".$b1[1],"token"=>$t[1],"time"=>$tm[1],"surf"=>$surf,"sid"=>preg_replace("/[^0-9]/","",$sid[1]),"antibot"=>explode('"',$r),"notif"=>$rw[1]];}
 
 
 
