@@ -17,7 +17,7 @@ preg_match('#text-success">(.*?)<#is',$r,$u);
 preg_match('#sidebarCoins">(.*?)</b> (.*?) <small class="text-success">(.*?)<#is',$r,$b);
 preg_match('#text-success"><b>(.*?)<#is',$r,$b1);
 preg_match("#([a-z0-9]{64})#is",$r,$t);
-preg_match_all('#class="align-middle">(.*?)</td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="text-right"><(.*?)" class="#',$r,$tes);
+preg_match_all('#class="align-middle">(.*?)</td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="text-right"><(.*?)" class="#is',$r,$tes);
 preg_match('#success mt-0" role="alert">(.*?)<#is',$r,$n);
 
 //die($tes[1][0].n.$tes[2][0].n.$tes[3][0].n.$tes[4][0]);
