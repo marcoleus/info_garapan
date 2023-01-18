@@ -17,7 +17,7 @@ preg_match("#Just a moment#is",$r,$cf);
 preg_match("#username: '(.*?)'#is",$r,$u);
 preg_match_all('#class="mt-1"><b>(.*?)<#is',$r,$b);
 preg_match("#([a-z0-9]{64})#is",$r,$t);
-preg_match_all('#align-middle" style="padding-left:20px;">(.*?)</td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="text-right"><(.*?)" class="#',$r,$tes);
+preg_match_all('#align-middle" style="padding-left:20px;">(.*?)</td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="text-right"><(.*?)" class="#is',$r,$tes);
 preg_match('#center mt-0" role="alert">(.*?)<#is',$r,$n);
 
 return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1][1]." and ".$b[1][2],"token"=>$t[1],"host"=>$tes[1],"left"=>$tes[3],"go"=>$tes[4],"links"=>json_decode($r)->shortlink,"notif"=>$n[1],"antibot"=>explode('"',$r)];}
