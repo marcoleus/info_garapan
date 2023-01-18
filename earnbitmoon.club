@@ -19,7 +19,7 @@ preg_match('#text-success">(.*?)<#is',$r,$u);
 preg_match('#id="sidebarCoins">(.*?)<#is',$r,$b);
 preg_match('#text-success"><b>(.*?)<#is',$r,$b1);
 preg_match("#([a-z0-9]{64})#is",$r,$t);
-preg_match_all('#class="align-middle">(.*?)</td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="text-right"><(.*?)" class="#',$r,$tes);
+preg_match_all('#class="align-middle">(.*?)</td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="text-right"><(.*?)" class="#is',$r,$tes);
 preg_match('#success mt-0" role="alert">(.*?)<#is',$r,$n);
 
 return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1].$b[2].$b[3]." and ".$b1[1],"token"=>$t[1],"host"=>$tes[1],"left"=>$tes[3],"go"=>$tes[4],"links"=>json_decode($r)->shortlink,"notif"=>$n[1],"antibot"=>explode('"',$r)];}
