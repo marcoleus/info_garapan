@@ -32,7 +32,7 @@ shorlink:
 while(true){$r=sl();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["cl"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
-if($re["data"]==null){print m."bypass all shorlink fly family success".n;exit;}
+if($re["data"]==null){die(lah());}
 $go=curl(host.$coin.$re["data"],hmc());
 $link=valid($go[0]);
 if($link==0){goto shorlink;}
