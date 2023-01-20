@@ -31,6 +31,6 @@ $r1=auto($c[0],$r["token"])["res"];
 preg_match("#title: '(.*?)'#is",$r1,$s);
 preg_match("#html: '(.*?)'#is",$r1,$s1);
 if($s[1]=='Success!'){print h.$s1[1].n;line();
-}}else{print m."sorry no energy".n;goto auto;}}
+}}else{lah(1);goto auto;}}
 
 
