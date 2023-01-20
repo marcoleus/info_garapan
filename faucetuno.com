@@ -34,9 +34,9 @@ $r=dashboard();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
 
 menu:
-ket(1,"shorlink",2,"withdrawal");
+ket(1,"shorlink",2,"withdrawal",3,"update cookie");
 $pil=tx("number").line();
-if($pil==1){goto shorlink;}elseif($pil==2){goto wd;}else{goto menu;}
+if($pil==1){goto shorlink;}elseif($pil==2){goto wd;}elseif($pil==3){unlink($asu);goto DATA;}else{goto menu;}
 
 wd:
 $r=dashboard();
@@ -53,7 +53,7 @@ shorlink:
 while(true){$r=sl();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
-if($re["data"]==null){print m."bypass all shorlink fly family success".n;goto menu;}
+if($re["data"]==null){lah();goto menu;}
 $go=curl($re["go"],hmc());
 $link=valid($go[0]);
 if($link==0){goto shorlink;}
