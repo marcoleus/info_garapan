@@ -27,17 +27,12 @@ return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1][0],"en
 $r=dashboard();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"],"energy",$r["energy"]).line();
 
-menu:
-ket(1,"auto faucet",2,"update cookie");
-$pil=tx("number").line();
-if($pil==1){goto auto;}elseif($pil==2){unlink($asu);goto DATA;}else{goto menu;}
-
 
 shorlink:
 while(true){$r=sl();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
-if($re["data"]==null){lah();goto menu;}
+if($re["data"]==null){lah();t24();goto shorlink;}
 $go=curl($re["go"],hmc());
 $link=valid($go[1]);
 if($link==0){goto shorlink;}
