@@ -36,9 +36,9 @@ $r=dashboard();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"],"energy",$r["energy"]).line();
 
 menu:
-ket(1,"auto faucet",2,"shorlink");
+ket(1,"auto faucet",2,"shorlink",3,"update cookie");
 $pil=tx("number").line();
-if($pil==1){goto auto;}elseif($pil==2){goto shorlink;}else{goto menu;}
+if($pil==1){goto auto;}elseif($pil==2){goto shorlink;}elseif($pil==3){unlink($asu);goto DATA;}else{goto menu;}
 
 auto:
 while(true){$r=auto();
@@ -46,13 +46,13 @@ if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif(
 if($r["time"]){tmr(2,$r["time"]);
 $r1=auto(http_build_query(["token"=>$r["token"]]))["res"];
 preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1,$s);
-if($s[2]=="Good job!"){print h.$s[2]." ".$s[3].n;line();}}else{print m."sorry no energy".n;goto menu;}}
+if($s[2]=="Good job!"){print h.$s[2]." ".$s[3].n;line();}}else{lah(1);goto menu;}}
 
 shorlink:
 while(true){$r=sl();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
-if($re["data"]==null){print m."bypass all shorlink fly family success".n;goto menu;}
+if($re["data"]==null){lah();goto menu;}
 $go=curl($re["go"],hmc());
 $link=valid($go[0]);
 if($link==0){goto shorlink;}
