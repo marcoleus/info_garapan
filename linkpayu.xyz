@@ -16,7 +16,7 @@ preg_match("#title: '(.*?)'#is",$r1,$s);
 preg_match("#html: '(.*?)'#is",$r1,$s1);
 if($s[1]=='Success!'){print h.$s1[1].n;line();}else{unlink("email");print m.$s[1];r();goto DATA;}
 
-$r=sl();if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("email",$email,"status",$r["status"]).line();
+$r=sl();if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("email",$email).line();
 
 shorlink:
 while(true){$r=sl();
@@ -36,9 +36,10 @@ print h.$s[1]." ".$s1[1].n;line();
 
 
 function sl($byp=0){if($byp){$r=curlc($byp,hac())[1];}else{$r=curlc(host."links/currency/usdt",hac())[1];}
+//die(file_put_contents("t.html",$r));
 preg_match("#Just a moment#is",$r,$cf);
-preg_match('#badge-success">(.*?)<#is',$r,$b);
+preg_match('#Logout#is',$r,$b);
 preg_match_all('#card-title mt-0">(.*?)<#is',$r,$host);
 preg_match_all("#(https?:\/\/[a-zA-Z0-9\/-\/.]*)(\/go\/?[a-zA-Z0-9\/-\/.]*)(.*?)#is",$r,$go);
 preg_match_all('#Claim <span class="badge badge-info">(.*?)<#is',$r,$left);
-return ["res"=>$r,"cloudflare"=>$cf[0],"status"=>$b[1],"go"=>$go[0],"host"=>$host[1],"left"=>$left[1]];}
+return ["res"=>$r,"cloudflare"=>$cf[0],"status"=>$b[0],"go"=>$go[0],"host"=>$host[1],"left"=>$left[1]];}
