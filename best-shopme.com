@@ -75,7 +75,7 @@ if($r4["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif
 $tmr=$r4["time"];
 ket("balance",$r4["balance"]).line();
 if($tmr){tmr(2,explode(":",$tmr)[0]*60+explode(":",$tmr)[1]);}
-$data=http_build_query(["a"=>"validateClaim","token"=>$r4["token"]]);
+$data=http_build_query(["a"=>"validateClaim","autoToken"=>$r4["token"]]);
 $r5=auto(3,$data);
 if($r5["data"]->status==200){
 print h.$r5["notif"].n;line();}
