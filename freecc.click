@@ -1,14 +1,15 @@
 <?php
 
 eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
-error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://freecc.click/",sc="freecc";$asu="cookie_".explode("/",host)[2];
+error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://freecc.click/",sc="freecc";$asu="cookie_".explode("/",host)[2];
 $disable=["n"];
 
 DATA:
+unlink(explode("/",host)[2].".txt").c();
 $u_a=save("useragent");
 $u_c=save($asu);
 
-function sl($byp=0){if($byp){$r=curl($byp,hmc())[1];}else{$r=curl(host."links",hmc())[1];}
+function sl($byp=0){if($byp){$r=curlc($byp,hmc())[1];}else{$r=curlc(host."links",hmc())[1];}
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#font-medium">(.*?)<#is',$r,$u);
 preg_match_all('#text-primary">(.*?)<#is',$r,$host);
@@ -18,7 +19,7 @@ return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"go"=>$go[0],"host"=>$h
 
 
 function auto($data=0){if($data){$v="/verify";}
-$r=curl(host."auto".$v,hmc(),$data)[1];
+$r=curlc(host."auto".$v,hmc(),$data)[1];
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#font-medium">(.*?)<#is',$r,$u);
 preg_match('#token" value="(.*?)"#is',$r,$t);
@@ -28,7 +29,7 @@ return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"token"=>$t[1],"time"=>
 
 
 function dashboard(){
-$r=curl(host."dashboard",hmc())[1];
+$r=curlc(host."dashboard",hmc())[1];
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#font-medium">(.*?)<#is',$r,$u);
 preg_match_all('#leading-8 mt-6">(.*?)<#is',$r,$b);
@@ -37,7 +38,7 @@ return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1][1],"cs
 
 function wd($data=0){
 if($data){$w="wdfaucetpay";}else{$w="withdraw";}
-$r=curl(host.$w,hmc(),$data)[1];
+$r=curlc(host.$w,hmc(),$data)[1];
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#font-medium">(.*?)<#is',$r,$u);
 preg_match('#text-success"></i>: (.*?) Coins#is',$r,$b);
@@ -84,7 +85,7 @@ while(true){$r=sl();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],str_replace("go","cancel",$r["go"]),$r["left"]);
 if($re["data"]==null){lah();goto menu;}
-$go=curl(str_replace("go","cancel",$re["go"]),hmc());
+$go=curlc(str_replace("go","cancel",$re["go"]),hmc());
 $link=valid($go[0],1);
 if($link==0){goto shorlink;}
 $r1=sl($link)["res"];
