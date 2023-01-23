@@ -29,7 +29,7 @@ $r=sl($coin);if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto 
 
 shorlink:
 while(true){$r=sl($coin);
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif(preg_match("#EMPTY#is",$r["res"])){print m."balance $coin tidak tersedia!".n;goto a;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){die(lah());}
 $go=curlc($re["go"],hac());
