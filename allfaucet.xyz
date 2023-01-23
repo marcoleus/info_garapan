@@ -24,7 +24,8 @@ $coin=$c[$coi-1];
 if($coin==null){goto a;}
 
 
-$r=sl($coin);if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("email",$email).line();
+
+$r=sl($coin);if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif(preg_match("#EMPTY#is",$r["res"])){print m."balance $coin tidak tersedia!".n;goto a;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("email",$email).line();
 
 shorlink:
 while(true){$r=sl($coin);
