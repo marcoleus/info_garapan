@@ -54,7 +54,7 @@ if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif(
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){lah();goto menu;}
 $go=curl($re["go"],hmc());
-$link=str_replace("verify","back",valid($go[1]));
+$link=valid($go[1]);
 if($link==0){goto shorlink;}
 $r1=sl($link)["res"];
 preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1,$s);
