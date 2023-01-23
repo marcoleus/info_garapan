@@ -35,12 +35,20 @@ if($re["data"]==null){die(lah());}
 $go=curlc($re["go"],hac());
 $link=valid($go[0]);
 if($link==0){goto shorlink;}
-$r1=sl($coin,$link)["res"];
+$r1=sl($coin,str_replace("verify","back",$link))["res"];
 preg_match("#title: '(.*?)'#is",$r1,$s);
 preg_match("#html: '(.*?)'#is",$r1,$s1);
 if($s[1]=='Success!'){
 print h.$s1[1].n;line();
-}else{print m."invalid key";r();}}
+}else{goto boost;}}
+
+boost:
+$r1=sl($coin,$link)["res"];
+preg_match("#title: '(.*?)'#is",$r1,$s);
+preg_match("#html: '(.*?)'#is",$r1,$s1);
+if($s[1]=='Success!'){
+print h.$s1[1].n;line();goto shorlink;
+}else{print m."invalid key";r();goto shorlink;}
 
 
 
