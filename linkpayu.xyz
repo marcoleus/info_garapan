@@ -35,7 +35,7 @@ print h.$s[1]." ".$s1[1].n;line();
 
 
 
-function sl($byp=0){if($byp){$r=curlc($byp,hac())[1];}else{$r=curlc(host."links/currency/usdt",hac())[1];}
+function sl($byp=0){if($byp){$r=curlc($byp,hac())[1];}else{$r=curlc(host."links/currency/ltc",hac())[1];}
 //die(file_put_contents("t.html",$r));
 preg_match("#Just a moment#is",$r,$cf);
 preg_match('#Logout#is',$r,$b);
