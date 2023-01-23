@@ -1,0 +1,68 @@
+<?php
+
+eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/captcha"));
+eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
+error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://coinpayz.xyz/",sc="coinpayz";$asu="cookie_".explode("/",host)[2];
+$disable=["n"];
+
+DATA:
+$u_a=save("useragent");
+$u_c=save($asu);
+
+function sl($byp=0){if($byp){$r=curl($byp,hmc())[1];}else{$r=curl(host."links",hmc())[1];}
+preg_match("#Just a moment#is",$r,$cf);
+preg_match('#t-username">(.*?)<#is',$r,$u);
+preg_match('#Balance : (.*?) Coins#is',$r,$b);
+preg_match_all('#size-18 mt-0">(.*?)<#is',$r,$host);
+preg_match_all("#(https?:\/\/[a-zA-Z0-9\/-\/.]*)(\/go\/?[0-9]*)(.*?)#is",$r,$go);
+preg_match_all('#info"></i> ([0-9\/0-9]*)(.*?)#is',$r,$left);
+if($b[1]){$bl=$b[1]/100000;}
+return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1]." Coins = ".$bl." USDT","go"=>$go[0],"host"=>$host[1],"left"=>$left[1]];}
+
+
+
+
+
+function faucet($data=0){if($data){$v="/verify";}
+$r=curl(host."faucet".$v,hmc(),$data)[1];
+preg_match("#Just a moment#is",$r,$cf);
+preg_match('#t-username">(.*?)<#is',$r,$u);
+preg_match('#Balance : (.*?) Coins#is',$r,$b);
+preg_match_all('#token" value="(.*?)">#is',$r,$t);
+preg_match('#var wait = (.*?) -#is',$r,$tmr);
+preg_match('#amation-circle"></i> (.*?)<#is',$r,$c);
+preg_match_all('#rel=\\\"(.*?)\\\">#is',$r,$ab);
+if($b[1]){$bl=$b[1]/100000;}
+return ["res"=>$r,"cloudflare"=>$cf[1],"username"=>$u[1],"balance"=>$b[1]." Coins = ".$bl." USDT","time"=>$tmr[1],"csrf"=>$t[1][0],"token"=>$t[1][1],"notif"=>$c[1],"antb"=>antb($ab)];}
+
+
+
+$r=sl();
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
+
+menu:
+ket(1,"faucet",2,"shorlink",3,"update cookie");
+$pil=tx("number").line();
+if($pil==1){goto faucet;}elseif($pil==2){goto shorlink;}elseif($pil==3){unlink($asu);goto DATA;}else{goto menu;}
+
+faucet:
+while(true){$r=faucet();$tmr=$r["time"];
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($tmr){tmr(1,$tmr);goto faucet;}$ic=icon($r["res"]);
+if($ic){L(5);$r1=faucet(http_build_query(["csrf_token_name"=>$r["csrf"],"token"=>$r["token"],"utt"=>"","antibotlinks"=>implode(" ",$r["antb"][2]),"captcha"=>"mooncaptchav2","answer"=>$ic]));
+if($r1["notif"]){print m.$r1["notif"];r();}elseif(preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1["res"],$out)){print h.$out[2];r();print h.$out[3].n;line().ket("balance",$r1["balance"]).line();tmr(1,$r1["time"]);goto faucet;}}}
+
+
+
+shorlink:
+while(true){$r=sl();
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
+$re=find($r["host"],$r["go"],$r["left"]);
+if($re["data"]==null){lah();goto menu;}
+$go=curl($re["go"],hmc());
+$link=valid($go[0]);
+if($link==0){goto shorlink;}
+$r1=sl($link);
+preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1["res"],$s);
+if($s[2]=="Good job!"){print h.$s[2];r();print h.$s[3].n;
+line().ket("balance",$r1["balance"]).line();}else{print m."invalid key";r();}}
+
