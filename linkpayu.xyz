@@ -23,11 +23,11 @@ preg_match('#collapsed" href="/links(.*?)"#is',$r1,$c);
 $coin=$c[1];
 if($coin==null){goto DATA;}}else{unlink("email");print m.$s[1];r();goto DATA;}
 
-$r=sl($coin);if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("email",$email).line();
+$r=sl($coin);if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif(preg_match("#EMPTY#is",$r["res"])){die(m."balance $coin tidak tersedia!".n);}c().asci(sc).ket("email",$email).line();
 
 shorlink:
 while(true){$r=sl($coin);
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["status"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif(preg_match("#EMPTY#is",$r["res"])){die(m."balance tidak tersedia!".n);}
 $re=find($r["host"],$r["go"],$r["left"]);
 if($re["data"]==null){die(lah());}
 $go=curlc(str_replace("go","cancel",$re["go"]),hac());
