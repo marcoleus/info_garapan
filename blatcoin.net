@@ -20,11 +20,14 @@ preg_match('#text-primary"><b>(.*?)<#is',$r,$b);
 preg_match('#text-warning"><b>(.*?)<#is',$r,$b1);
 preg_match("#var token = '(.*?)'#is",$r,$t);
 preg_match("#href='(.*?)'#is",$r,$url);
+preg_match("#pes(.*?)<#is",$r,$res);
+preg_match("#([0-9]{9})#is",$res[0],$p);
 preg_match_all('#class="align-middle">(.*?)</td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="align-middle text-center"><b class="badge badge-dark">(.*?)</b></td><td class="text-right"><(.*?)" class="#is',$r,$tes);
 preg_match('#success mt-0" role="alert">(.*?)<#is',$r,$n);
-return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1].$b[2].$b[3]." and ".$b1[1],"token"=>$t[1],"host"=>$tes[1],"left"=>$tes[3],"go"=>$tes[4],"links"=>json_decode($r)->shortlink,"url"=>$url[1],"notif"=>$n[1],"antibot"=>explode('"',$r)];}
+return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1].$b[2].$b[3]." and ".$b1[1],"token"=>$t[1],"host"=>$tes[1],"left"=>$tes[3],"go"=>$tes[4],"pes"=>$p[1],"links"=>json_decode($r)->shortlink,"url"=>$url[1],"notif"=>$n[1],"antibot"=>explode('"',$r)];}
 
 $r=sl(0);
+//die(file_put_contents("t.html",$r["res"]));
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
 
 shorlink:$x=-1;$r=sl(0);
@@ -38,15 +41,17 @@ xxnxcom:
 while(true){$x++; $x=$x+1;
 If($x==11){goto xxnxcom;}
 $data=http_build_query(["cID"=>0,"pC"=>$ic["antibot"][$x],"rT"=>2]);
+
 sl(2,$data)["res"];
 if($ic["antibot"][$x]==null){goto shorlink;}
 $data=http_build_query([
 "a"=>"getShortlink",
 "data"=>$re["data"],
 "token"=>$r["token"],
-"pes"=>955282500,
+"pes"=>$r["pes"],
 "captcha-idhf"=>0,
 "captcha-hf"=>$ic["antibot"][$x]]);
+//die($data);
 $go=sl(3,$data)["links"];
 if($go){$link=valid($go,1);
 if($link==0){goto shorlink;}
