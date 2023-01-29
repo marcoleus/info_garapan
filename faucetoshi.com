@@ -69,7 +69,7 @@ return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1][0],"en
 
 $r=dashboard();
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"]).line();
-goto faucet;
+
 menu:
 ket(1,"start all claim",2,"update cookie");
 $pil=tx("number").line();
@@ -87,7 +87,6 @@ $data=http_build_query(["antibotlinks"=>implode(" ",$r["antb"][0]),
 "token"=>$r["token"][1][1],
 "captcha"=>"recaptchav3",
 "recaptchav3"=>$rrep]);
-print $data.n.n;
 $r1=faucet($data);
 preg_match('#amation-circle"></i> (.*?)<#is',$r1["res"],$inv);
 preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1["res"],$s);
