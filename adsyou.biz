@@ -17,7 +17,7 @@ preg_match('#let timer = (.*?),#is',$r,$tmr);
 preg_match('#name="token" value="(.*?)"#is',$r,$t);
 $tk=http_build_query(["token"=>$t[1]]);
 return ["res"=>$r,"cloudflare"=>$cf[0],"balance"=>$b[1],"token"=>$tk,"time"=>$tmr[1],"reward"=>$out];}
-$c=["trx","doge","bnb"];
+$c=["dgb","doge","bnb"];
 
 $r=auto($c[0]);
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["balance"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("balance",$r["balance"]).line();
