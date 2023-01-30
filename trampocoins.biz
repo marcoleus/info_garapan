@@ -1,0 +1,49 @@
+<?php
+
+eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
+error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://trampocoins.biz/",sc="trampocoins";$asu=explode("/",host)[2].".txt";
+
+
+DATA:
+$email=save("email");
+
+
+$lg=base_run(host);
+if($lg["logout"]=="logout"){$r=$lg;goto start;}
+$data=http_build_query(["wallet"=>$email,explode('"',$lg["token"][1][0])[0]=>$lg["token"][2][0]]);
+$r=base_run(host."auth/login",$data);
+preg_match("#title: '(.*?)'#is",$r["res"],$s);
+if($s[1]=='Success!'){print h.$s[1];r();}else{print m.$s[1];r();unlink($asu).c();goto DATA;}
+
+
+
+start:
+$r1=base_run($r["auto"]);
+if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif(preg_match("#empty#is",$r1["res"])){die(m."balance tidak tersedia!".n);}c().asci(sc).ket("email",$email,"claims left",$r1["left"]).line();
+
+
+
+while(true){
+$r2=base_run($r["auto"]);
+if($r2["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r2["logout"]==null){print m."update cookie_".$asu.n;unlink($asu);goto DATA;}elseif(preg_match("#empty#is",$r2["res"])){die(m."balance tidak tersedia!".n);}elseif($r2["time"]){L(30);//tmr(2,$r2["time"]);
+$data=http_build_query([$r2["token"][1][0]=>$r2["token"][2][0],explode('"',$r2["token"][1][1])[0]=>$r2["token"][2][1],$r2["token"][1][2]=>$r2["token"][2][2]]);
+$r3=base_run($r2["verify"],$data)["res"];
+preg_match("#title: '(.*?)'#is",$r3,$s);
+preg_match("#html: '(.*?)'#is",$r3,$s1);
+if($s[1]=='Success!'){print h.$s[1];r();
+print h.$s1[1].n;line();
+}}else{ket("claims left",$r2["left"]).line();exit;}}
+
+
+
+function base_run($url,$data=0){
+$r=curlc($url,hac(),$data)[1];
+//die(file_put_contents("t.html",$r));
+preg_match("#Just a moment#is",$r,$cf);
+preg_match("#logout#is",$r,$log);
+preg_match_all('#(font-weight-bold">*)([0-9\/0-9]*)(.*?)#is',$r,$left);
+preg_match('#collapse-item" href="(.*?)"#is',$r,$aut);
+preg_match('#<form action="(.*?)"#is',$r,$ver);
+preg_match('#let timer = (.*?),#is',$r,$tmr);
+preg_match_all('#hidden" name="(.*?)" value="(.*?)"#is',$r,$t);
+return ["res"=>$r,"cloudflare"=>$cf[0],"logout"=>$log[0],"left"=>$left[2][2],"token"=>$t,"time"=>$tmr[1],"auto"=>$aut[1],"verify"=>$ver[1]];}
