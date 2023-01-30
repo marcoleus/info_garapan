@@ -3,13 +3,12 @@
 eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
 error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://trampocoins.biz/",sc="trampocoins";$asu=explode("/",host)[2].".txt";
 
-
 DATA:
 $email=save("email");
 
 
 $lg=base_run(host);
-if($lg["logout"]=="logout"){$r=$lg;goto start;}elseif($lg["left"]==null){print m."update cookie_".$asu.n;unlink($asu);goto DATA;}
+if($lg["logout"]=="logout"){$r=$lg;goto start;}
 $data=http_build_query(["wallet"=>$email,explode('"',$lg["token"][1][0])[0]=>$lg["token"][2][0]]);
 $r=base_run(host."auth/login",$data);
 preg_match("#title: '(.*?)'#is",$r["res"],$s);
@@ -19,7 +18,7 @@ if($s[1]=='Success!'){print h.$s[1];r();}else{print m.$s[1];r();unlink($asu).c()
 
 start:
 $r1=base_run($r["auto"]);
-if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif(preg_match("#empty#is",$r1["res"])){die(m."balance tidak tersedia!".n);}c().asci(sc).ket("email",$email,"claims left",$r1["left"]).line();
+if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r1["left"]==null){print m."update cookie_".$asu.n;unlink($asu);goto DATA;}elseif(preg_match("#empty#is",$r1["res"])){die(m."balance tidak tersedia!".n);}c().asci(sc).ket("email",$email,"claims left",$r1["left"]).line();
 
 
 
