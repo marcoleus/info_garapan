@@ -9,7 +9,7 @@ $email=save("email");
 
 
 $lg=base_run(host);
-if($lg["logout"]=="logout"){$r=$lg;goto start;}
+if($lg["logout"]=="logout"){$r=$lg;goto start;}elseif($lg["left"]==null){print m."update cookie_".$asu.n;unlink($asu);goto DATA;}
 $data=http_build_query(["wallet"=>$email,explode('"',$lg["token"][1][0])[0]=>$lg["token"][2][0]]);
 $r=base_run(host."auth/login",$data);
 preg_match("#title: '(.*?)'#is",$r["res"],$s);
