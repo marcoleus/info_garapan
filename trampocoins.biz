@@ -24,7 +24,7 @@ if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif
 
 while(true){
 $r2=base_run($r["auto"]);
-if($r2["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r2["logout"]==null){print m."update cookie_".$asu.n;unlink($asu);goto DATA;}elseif(preg_match("#empty#is",$r2["res"])){die(m."balance tidak tersedia!".n);}elseif($r2["time"]){L(30);//tmr(2,$r2["time"]);
+if($r2["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r2["logout"]==null){print m."update cookie_".$asu.n;unlink($asu);goto DATA;}elseif(preg_match("#empty#is",$r2["res"])){die(m."balance tidak tersedia!".n);}elseif($r2["time"]){L(20);//tmr(2,$r2["time"]);
 $data=http_build_query([$r2["token"][1][0]=>$r2["token"][2][0],explode('"',$r2["token"][1][1])[0]=>$r2["token"][2][1],$r2["token"][1][2]=>$r2["token"][2][2]]);
 $r3=base_run($r2["verify"],$data)["res"];
 preg_match("#title: '(.*?)'#is",$r3,$s);
