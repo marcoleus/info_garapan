@@ -63,7 +63,7 @@ preg_match("#title: `(.*?)`#is",$r2,$s);
 preg_match("#html: `(.*?)`#is",$r2,$s1);
 if($s[1]=='Success!'){print h.$s[1];r();
 print h.$s1[1].n;line();
-}else{lah(1);goto menu;}}}
+}}else{lah(1);goto menu;}}
 
 wd:
 $r1=base_run(host."dashboard");
