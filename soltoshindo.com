@@ -36,8 +36,8 @@ if($link==0){goto sl;}
 $r2=base_run($link)["res"];
 preg_match("#title: `(.*?)`#is",$r2,$s);
 preg_match("#html: `(.*?)`#is",$r2,$s1);
-if($s[1]=='Success!'){
-print h.$s[1]." ".$s1[1].n;line();
+if($s[1]=='Success!'){print h.$s[1];r();
+print h.$s1[1].n;line();
 }else{print m."invalid key";r();}}
 
 
