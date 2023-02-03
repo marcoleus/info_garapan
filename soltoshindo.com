@@ -6,12 +6,13 @@ error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\0
 
 
 
+
 DATA:
 $u_a=save("useragent");
 $u_c=save($asu);
 
 $r=base_run(host."dashboard");
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket($r["email"][1],$r["email"][2],"username",$r["username"],"balance",$r["balance"]).line();
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif(preg_match("#([a-zA-Z0-9.]*)(@gmail.com|@yahoo.com)#is",$r["email"][2])==null){die(m."tambahkan email faucetpay dulu awokawokawok".n);}c().asci(sc).ket($r["email"][1],$r["email"][2],"username",$r["username"],"balance",$r["balance"]).line();
 
 menu:
 ket(1,"start all claim",2,"withdraw",3,"update cookie");
@@ -26,7 +27,8 @@ if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif
 $re=find($r1["host"],$r1["go"],$r1["left"]);
 //die($r1["host"][$re["no"]]);
 if($re["data"]==null){ket(k.explode("/",host)[2],m."target shorlink not found","","start achievements").line();L(5);goto acv;}
-$data=http_build_query([$r1["token"][1][$re["no"]]=>$r1["token"][2][$re["no"]]]);
+//$data=http_build_query([str_replace('" id="token','',$r1["token"][1][0])=>$r1["token"][2][0]]);
+//$data=http_build_query([$r1["token"][1][$re["no"]]=>$r1["token"][2][$re["no"]]]);
 $go=curl($re["go"],hmc());
 //die($go[1]);
 $link=valid($go[0]);
