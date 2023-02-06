@@ -33,8 +33,8 @@ $r=base_run(host."ptc");
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["firewal"]){$firewall=base_run(host."firewall");base_run($firewall["verify"],http_build_query(["g-recaptcha-response"=>"","captchaType"=>"recaptchav2",$firewall["token"][1][1]=>$firewall["token"][2][1]]));goto ptc;}elseif($r["view"]==null){ket(k.explode("/",host)[2],m."ptc not found","","start faucet").line();L(5);goto claim;}
 $r1=base_run($r["view"]);
 if($ic=icon($r1["res"])){tmr(2,$r1["time"]);
-$ver=base_run($r1["verify"],http_build_query(["captcha"=>"mooncaptchav2","answer"=>$ic,$r1["token"][1][0]=>$r1["token"][2][0],$r1["token"][1][1]=>$r1["token"][2][1]]));
-if($r1["notif"]){print m.$r1["notif"];r();}elseif(preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$ver["res"],$out)){print h.$out[2];r();print h.$out[3].n;line();}}}
+$r2=base_run($r1["verify"],http_build_query(["captcha"=>"mooncaptchav2","answer"=>$ic,$r1["token"][1][0]=>$r1["token"][2][0],$r1["token"][1][1]=>$r1["token"][2][1]]));
+if(preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r2["res"],$s)){print h.$s[2];r();print h.$s[3].n;line();}else{print m.$r2["notif"];r();}}}
 
 
 claim:
@@ -42,7 +42,8 @@ while(true){$r=base_run(host."faucet");
 $tmr=$r["time"];
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["firewal"]){$firewall=base_run(host."firewall");base_run($firewall["verify"],http_build_query(["g-recaptcha-response"=>"","captchaType"=>"recaptchav2",$firewall["token"][1][1]=>$firewall["token"][2][1]]));goto claim;}elseif($tmr){tmr(1,$tmr);goto claim;}$ic=icon($r["res"]);
 if($ic){$r1=base_run($r["verify"],http_build_query([str_replace('" id="token','',$r["token"][1][0])=>$r["token"][2][0],$r["token"][1][1]=>$r["token"][2][1],"antibotlinks"=>implode(" ",$r["antb"][2]),"captcha"=>"mooncaptchav2","answer"=>$ic]));
-if($r1["notif"]){print m.$r1["notif"];r();}elseif(preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1["res"],$out)){print h.$out[2];r();print h.$out[3].n;line();tmr(1,$r1["time"]);}}}
+preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1["res"],$s);
+if($s[2]=="Good job!"){print h.$s[2];r();print h.$s[3].n;line();tmr(1,$r1["time"]);}else{print m.$r1["notif"];r();}}}
 
 
 acv:
@@ -53,8 +54,8 @@ for($i=0;$i<100;$i++){if($r1["acv"][$i]==null){ket(k.explode("/",host)[2],m."ach
 if($r1["target"][2][$i] >= $r1["target"][4][$i]){
 $data=http_build_query([$r1["token"][1][0]=>$r1["token"][2][0]]);
 $r2=base_run($r1["acv"][$i],$data);
-preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$ver["res"],$out);
-if($out[2]){print h.$out[2];r();print h.$out[3].n;line();goto acv;}}}}
+preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r2["res"],$s);
+if($s[2]=="Good job!"){print h.$s[2];r();print h.$s[3].n;line();goto acv;}}}}
 
 
 wd:
@@ -65,8 +66,8 @@ $coi=tx("number").line();
 $wallet=tx("email_wallet").line();
 if($coi==null){goto wd;}
 $r2=base_run(host."withdraw/withdraw",http_build_query([$r1["token"][1][0]=>$r1["token"][2][0],"amount"=>$r1["amount"],"method"=>$r1["code"][$coi-1],"wallet"=>$wallet]));
-preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r2["res"],$out);
-if($out[2]){print h.$out[2];r();print h.$out[3].n;line();goto menu;}else{print m.$out[2].n;L(5);goto wd;}
+preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r2["res"],$s);
+if($s[2]=="Good job!"){print h.$s[2];r();print h.$s[3].n;line();goto menu;}else{print m.$s[2].n;L(5);goto wd;}
 
 
 
