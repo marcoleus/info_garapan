@@ -7,7 +7,6 @@ error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\0
 //eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/".$asu));
 
 
-$coi=1;
 DATA:
 $u_a=save("useragent");
 $u_c=save($asu);
