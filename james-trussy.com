@@ -1,13 +1,17 @@
 <?php
 
+
 eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
+
 error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://james-trussy.com/",sc="james-trussy";
 $asu="cookie_".explode("/",host)[2];
+
 
 
 DATA:
 $u_a=save("useragent");
 $u_c=save($asu);
+$api_proxy=save("api_proxy");
 
 
 function faucet($data=0){if($data){$v="/verify";}
@@ -67,6 +71,7 @@ $data=http_build_query([
 "captcha"=>"recaptchav3",
 "recaptchav3"=>$rrep,
 "g-recaptcha-response"=>""]);
+//print $data.n;
 $r1=faucet($data);
 preg_match('#amation-circle"></i> (.*?)<#is',$r1["res"],$inv);
 preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1["res"],$s);
@@ -91,6 +96,3 @@ if($r["time"]){tmr(2,$r["time"]);
 $r1=auto(http_build_query(["token"=>$r["token"]]));
 preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1["res"],$s);
 if($s[2]=="Good job!"){print h.$s[2];r();print h.$s[3].n;line();}}else{lah(1);goto menu;}}
-
-
-
