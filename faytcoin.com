@@ -6,8 +6,7 @@ $asu="cookie_".explode("/",host)[2];
 DATA:
 $u_a=save("useragent");
 $u_c=save($asu);
-$api_proxy=save("api_proxy");
-//base_run(host."achievements");
+save("proxy");
 
 
 
