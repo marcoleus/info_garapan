@@ -26,7 +26,7 @@ if($pil==1){ket("","start claim daily").line();goto daily;}elseif($pil==2){goto 
 
 daily:
 $r1=base_run(host."daily");
-if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r1["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif($r1["countdown"]){ket(k.explode("/",host)[2],m."ptc not found","","start ptc").line();L(5);goto ptc;}else{
+if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r1["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif($r1["countdown"]){ket(k.explode("/",host)[2],m."daily not found","","start ptc").line();L(5);goto ptc;}else{
 $ic=icon($r1["res"]);
 if($ic){base_run($r1["verify"],http_build_query([str_replace('" id="token','',$r1["token"][1][0])=>$r1["token"][2][0],$r1["token"][1][1]=>$r1["token"][2][1],"captcha"=>"mooncaptchav2","answer"=>$ic]));
 print h."daily bonus claimed successfully".n;line();ket(k.explode("/",host)[2],m."claim daily not found","","start ptc").line();L(5);goto ptc;}}
