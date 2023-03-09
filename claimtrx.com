@@ -50,11 +50,10 @@ if($s[1][0]=="Good job!"){print h.$s[1][0];r();print h.$s[1][1].n;line();goto ac
 claim:
 while(true){$r=base_run(host."faucet");
 $tmr=$r["time"];
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["active"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif($r["target_ptc"] >= 10){goto ptc;}elseif($r["limit"]){print h."shorlink 1x dulu anak dakjal".n;tx("enter to continue").line();goto claim;}elseif($tmr){tmr(1,$tmr);goto claim;}$ic=icon($r["res"]);
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["active"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif($r["target_ptc"] >= 10){goto ptc;}elseif($r["limit"]){ket("","energy habis anak ajg",1,"claim ptc & get energy to achievements",2,"shorlink");$pil=tx("number").line();if($pil==1){ket("","start ptc").line();goto ptc;}elseif($pil==2){goto claim;}else{goto menu;}}elseif($tmr){tmr(1,$tmr);goto claim;}$ic=icon($r["res"]);
 if($ic){$r1=base_run($r["verify"],http_build_query([str_replace('" id="token','',$r["token"][1][0])=>$r["token"][2][0],$r["token"][1][1]=>$r["token"][2][1],"captcha"=>"rscaptcha","rs_captcha_answer"=>$ic]));
 $s=$r1["notif"];
 if($s[1][0]=="Good job!"){print h.$s[1][0];r();print h.$s[1][1].n;line();tmr(1,$r1["time"]);}else{print m.$s[0];r();}}}
-
 
 wd:
 print "sorry wd manual dulu tolol!".n;line();goto menu;
