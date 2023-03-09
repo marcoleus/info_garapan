@@ -17,45 +17,57 @@ $u_c=save($asu);
 
 
 
-
 dashboard:
 $r=base_run(host."dashboard");
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket($r["email"][1],$r["email"][2],"username",$r["username"],"balance",$r["balance"]).line();
 //goto acv;
 menu:
-ket(1,"start claim",2,"achievements",3,"withdraw",4,"update cookie");
+ket(1,"start claim",2,"withdraw",3,"update cookie");
 $pil=tx("number").line();
-if($pil==1){ket("","start ptc").line();goto ptc;}elseif($pil==2){goto acv;}elseif($pil==3){goto wd;}elseif($pil==4){unlink($asu);goto DATA;}else{goto menu;}
+if($pil==1){ket("","start claim daily").line();goto daily;}elseif($pil==2){goto wd;}elseif($pil==3){unlink($asu);goto DATA;}else{goto menu;}
+
+
+
+daily:
+$r1=base_run(host."daily");
+if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r1["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}elseif($r1["countdown"]){ket(k.explode("/",host)[2],m."daily not found","","start ptc").line();L(5);goto ptc;}else{
+$ic=icon($r1["res"]);
+if($ic){base_run($r1["verify"],http_build_query([str_replace('" id="token','',$r1["token"][1][0])=>$r1["token"][2][0],$r1["token"][1][1]=>$r1["token"][2][1],"captcha"=>"mooncaptchav2","answer"=>$ic]));
+print h."daily bonus claimed successfully".n;line();ket(k.explode("/",host)[2],m."claim daily not found","","start ptc").line();L(5);goto ptc;}}
 
 
 
 ptc:
 while(true){
 $r=base_run(host."ptc");
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["view"]==null){ket(k.explode("/",host)[2],m."ptc not found","","start faucet").line();L(5);goto claim;}
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["view"]==null){ket(k.explode("/",host)[2],m."ptc not found","","start achievements").line();L(5);goto acv;}
 $r1=base_run($r["view"]);
 if($ic=icon($r1["res"])){tmr(2,$r1["time"]);
 $s=base_run($r1["verify"],http_build_query(["captcha"=>"mooncaptchav2","answer"=>$ic,$r1["token"][1][0]=>$r1["token"][2][0],$r1["token"][1][1]=>$r1["token"][2][1]]))["notif"];
 if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();}else{print m.$s[0];r();}}}
-
-claim:
-while(true){$r=base_run(host."faucet");
-$tmr=$r["time"];
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($tmr){tmr(1,$tmr);goto claim;}$ic=icon($r["res"]);
-if($ic){$r1=base_run($r["verify"],http_build_query([str_replace('" id="token','',$r["token"][1][0])=>$r["token"][2][0],$r["token"][1][1]=>$r["token"][2][1],"antibotlinks"=>implode(" ",$r["antb"][2]),"captcha"=>"mooncaptchav2","answer"=>$ic]));
-$s=$r1["notif"];
-if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();tmr(1,$r1["time"]);}else{print m.$s[0];r();}}}
 
 
 acv:
 while(true){
 $r1=base_run(host."achievements");
 if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r1["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
-for($i=0;$i<100;$i++){if($r1["acv"][$i]==null){ket(k.explode("/",host)[2],m."achievements not found").line();goto menu;}
+for($i=0;$i<100;$i++){if($r1["acv"][$i]==null){ket(k.explode("/",host)[2],m."achievements not found","","start faucet").line();L(5);goto claim;}
 if($r1["target"][1][$i] >= $r1["target"][2][$i]){
 $data=http_build_query([$r1["token"][1][0]=>$r1["token"][2][0]]);
 $s=base_run($r1["acv"][$i],$data)["notif"];
 if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();goto acv;}}}}
+
+
+
+claim:
+while(true){$r=base_run(host."faucet");
+$tmr=$r["time"];
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["target_ptc"] >= 5){goto daily;}elseif($tmr){tmr(1,$tmr);goto claim;}$ic=icon($r["res"]);
+if($ic){$r1=base_run($r["verify"],http_build_query([str_replace('" id="token','',$r["token"][1][0])=>$r["token"][2][0],$r["token"][1][1]=>$r["token"][2][1],"antibotlinks"=>implode(" ",$r["antb"][2]),"captcha"=>"mooncaptchav2","answer"=>$ic]));
+$s=$r1["notif"];
+if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();tmr(1,$r1["time"]);}else{print m.$s[0];r();}}}
+
+
 
 
 wd:
@@ -75,7 +87,7 @@ if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();goto me
 
 function base_run($url,$data=0){
 $r=curl($url,hmc(),$data)[1];
-//die(file_put_contents("icon.html",$r));
+//die(file_put_contents("respon",$r));
 preg_match("#Just a moment#is",$r,$cloudflare);
 preg_match("#siteUserFullName: '(.*?)<#is",$r,$username);
 preg_match_all('#<h2 class="title">(.*?)<#is',$r,$balance);
@@ -87,8 +99,9 @@ preg_match_all('#rel=\\\"(.*?)\\\">#is',$r,$ab);
 preg_match("#(https?:\/\/[a-z\/.]*)(verify\/?[a-z0-9\/]*)(.*?)#is",$r,$verify);
 preg_match("#window.location = '(.*?)'#is",$r,$view);
 preg_match_all("#(https?:\/\/[a-z\/.]*)(achievements\/claim?[a-z0-9\/]*)(.*?)#is",$r,$u_acv);
+preg_match('#class="ms-2 orange">(.*?)<#is',$r,$target_ptc);
 preg_match_all('#aria-valuemax="100"></div>'.n.'</div>'.n.'([0-9]*) \/ ([0-9]*)(.*?)#is',$r,$target);
-
+preg_match('#id="countdown-1">(.*?)<#is',$r,$countdown);
 preg_match('#var faucetpaycurrencies(.*?)];#is',$r,$fp_c);
 preg_match_all('#text: "(.*?)",#is',$fp_c[0],$curren);
 preg_match_all('#value: (.*?),#is',$fp_c[0],$code);
@@ -96,14 +109,5 @@ preg_match('#" max="(.*?)"#is',$r,$amn);
 
 //print_r($u_acv);
 //die(print_r($t_cs));
-return ["res"=>$r,"cloudflare"=>$cloudflare[0],"username"=>$username[1],"balance"=>$balance[1][2],"token"=>$t_cs,"time"=>$tmr[4],"notif"=>[$n_c[1],$n_r],"antb"=>antb($ab),"verify"=>$verify[0],"view"=>$view[1],"acv"=>$u_acv[0],"target"=>$target,"curren"=>$curren[1],"code"=>$code[1],"amount"=>$amn[1]];}
+return ["res"=>$r,"cloudflare"=>$cloudflare[0],"username"=>$username[1],"balance"=>$balance[1][2],"token"=>$t_cs,"time"=>$tmr[4],"notif"=>[$n_c[1],$n_r],"antb"=>antb($ab),"verify"=>$verify[0],"view"=>$view[1],"acv"=>$u_acv[0],"target"=>$target,"countdown"=>$countdown[1],"curren"=>$curren[1],"code"=>$code[1],"amount"=>$amn[1],"target_ptc"=>$target_ptc[1]];}
 
-
-/*
-daily:
-while(true){
-//daily bonus claimed successfully
-$r1=base_run(host."daily");
-if($r1["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r1["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}$ic=icon($r1["res"]);
-if($ic){$s=base_run($r1["verify"],http_build_query([str_replace('" id="token','',$r1["token"][1][0])=>$r1["token"][2][0],$r1["token"][1][1]=>$r1["token"][2][1],"captcha"=>"mooncaptchav2","answer"=>$ic]))["notif"];
-if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();goto claim;}else{goto claim;}}}*/
