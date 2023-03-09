@@ -50,7 +50,7 @@ if($s[1][0]=="Good job!"){print h.$s[1][0];r();print h.$s[1][1].n;line().ket("ba
 claim:
 while(true){$r=base_run(host."faucet");
 $tmr=$r["time"];
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["target_ptc"] >= 10){goto ptc;}elseif($tmr){tmr(1,$tmr);goto claim;}$ic=icon($r["res"]);
+if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["target_ptc"] >= 10){goto ptc;}elseif($r["limit"]){print h."shorlink 1x dulu anak dakjal".n;tx("enter to continue").line();goto claim;}elseif($tmr){tmr(1,$tmr);goto claim;}$ic=icon($r["res"]);
 if($ic){$r1=base_run($r["verify"],http_build_query([str_replace('" id="token','',$r["token"][1][0])=>$r["token"][2][0],$r["token"][1][1]=>$r["token"][2][1],"captcha"=>"rscaptcha","rs_captcha_answer"=>$ic]));
 $s=$r1["notif"];
 if($s[1][0]=="Good job!"){print h.$s[1][0];r();print h.$s[1][1].n;line().ket("balance",$r1["balance"]).line();tmr(1,$r1["time"]);}else{print m.$s[0];r();}}}
@@ -75,6 +75,7 @@ function base_run($url,$data=0){
 $r=curl($url,hmc(),$data)[1];
 //die(file_put_contents("respon",$r));
 preg_match("#Just a moment#is",$r,$cloudflare);
+preg_match('#Daily limit#is',$r,$limit);
 preg_match('#<div class="top-balance">(.*?)</p>#is',$r,$b);
 preg_match_all("#(title|text): '(.*?)'#is",$r,$n_r);
 
@@ -95,8 +96,7 @@ preg_match('#wallet" class="form-control" value="(.*?)"#is',$r,$wallet);
 //print_r($amn);
 //die(print_r($target_ptc));
 return ["res"=>$r,"cloudflare"=>$cloudflare[0],"balance"=>trim(strip_tags($b[1])),"token"=>$t_cs,"time"=>$tmr[4],"notif"=>[$n_c[1],$n_r[2]],"verify"=>$verify[0],"view"=>$view[1],
-"acv"=>$u_acv[0],"target"=>$target,"curren"=>$curren[1],"code"=>$code[1],"amount"=>$amn[1],"wallet"=>$wallet[1],"countdown"=>$countdown[1],"target_ptc"=>$target_ptc[1]];}
-
+"acv"=>$u_acv[0],"limit"=>$limit[0],"target"=>$target,"curren"=>$curren[1],"code"=>$code[1],"amount"=>$amn[1],"wallet"=>$wallet[1],"countdown"=>$countdown[1],"target_ptc"=>$target_ptc[1]];}
 
 
 
