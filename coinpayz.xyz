@@ -65,7 +65,7 @@ if($n_r==6){goto claim;}
 $r=base_run(host."faucet");
 $tmr=$r["time"];
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($tmr){tmr(1,$tmr);goto claim;}$ic=icon($r["res"]);
-if($ic){$r1=base_run($r["verify"],http_build_query([str_replace('" id="token','',$r["token"][1][0])=>$r["token"][2][0],$r["token"][1][1]=>$r["token"][2][1],"antibotlinks"=>implode(" ",$r["antb"][$n_r]),"captcha"=>"mooncaptchav2","answer"=>$ic]));$s=$r1["notif"];
+if($ic){$r1=base_run($r["verify"],http_build_query([str_replace('" id="token','',$r["token"][1][0])=>$r["token"][2][0],$r["token"][1][1]=>$r["token"][2][1],"antibotlinks"=>implode(" ",$r["antb"][0]),"captcha"=>"mooncaptchav2","answer"=>$ic]));$s=$r1["notif"];
 if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line().ket("balance",$r1["balance"]).line();
 if($r1["target_ptc"] >= 10){goto daily;}
 tmr(1,$r1["time"]);}else{print m.$s[0];r();}}}
