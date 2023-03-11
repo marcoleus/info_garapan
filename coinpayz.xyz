@@ -54,7 +54,7 @@ $s=$r2["notif"];
 if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line().ket("balance",$r2["balance"]).line();goto acv;}}}}
 
 faucetboard:
-$r=base_run($url);
+$r=base_run(host."faucetboard");
 if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
 $fb=$r["fb"];ket("","check faucetboard").line();
 for($k=0;$k<15;$k++){if($fb[1][$k]){ket($fb[1][$k],$fb[2][$k]." (".k.$fb[3][$k].p.") ".$fb[3][0]-$fb[3][$k]);}}line();
