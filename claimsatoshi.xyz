@@ -52,7 +52,7 @@ if($r2["firewall"]){line();print m.$r2["firewall"];r();goto firewall;}}else{prin
 claim:$redirect="claim";
 while(true){
 $r=base_run(host."faucet");
-if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["firewall"]){print m.$r["firewall"];r();goto firewall;}elseif($r["logout"]==null){print m.sc." cookie expired!".n;unlink($asu);goto Login;}elseif($r1["target_ptc"] >= 3){goto ptc;}elseif($r["c_l"]==0){ket(k.explode("/",host)[2],m."claim not found","","start achievements").line();L(5);goto achievements;}elseif($r["time"]){tmr(1,$r["time"]);goto claim;}
+if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["firewall"]){print m.$r["firewall"];r();goto firewall;}elseif($r["logout"]==null){print m.sc." cookie expired!".n;unlink($asu);goto Login;}elseif($r["target_ptc"] >= 3){goto ptc;}elseif($r["c_l"]==0){ket(k.explode("/",host)[2],m."claim not found","","start achievements").line();L(5);goto achievements;}elseif($r["time"]){tmr(1,$r["time"]);goto claim;}
 $cap=recaptchav3($grecaptcha,$v,host."faucet");
 $r1=base_run($r["redirect"][0],http_build_query([str_replace('" id="token','',$r["t_cs"][1][0])=>$r["t_cs"][2][0],$r["t_cs"][1][1]=>$r["t_cs"][2][1],"captcha"=>"recaptchav3","recaptchav3"=>$cap]));
 $s=$r1["notif"];
