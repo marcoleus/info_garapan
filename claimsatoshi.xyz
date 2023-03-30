@@ -1,60 +1,123 @@
 <?php
 
+
 eval(file_get_contents("https://raw.githubusercontent.com/marcoleus/build/main/Public"));
-error_reporting(0).unlink("cookie.txt").rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://claimsatoshi.xyz/",sc="claimsatoshi";$asu="cookie_".explode("/",host)[2];
-$disable=["clicksfly"];
+error_reporting(0).rt();const b="\033[1;34m",c="\033[1;36m",h="\033[1;32m",k="\033[1;33m",m="\033[1;31m",mp="\033[101m\033[1;37m",p="\033[1;37m",u="\033[1;35m",d="\033[0m",n="\n",host="https://claimsatoshi.xyz/",sc="claimsatoshi";
+$asu=explode("/",host)[2].".txt";
+//$r=base_run(host."withdraw");
+
+
+$grecaptcha="6LejU9EjAAAAAL_Bc_3IwVcpBjYr_g38oCOnoRE7";
+$v=reload_recaptchav3($grecaptcha);
+
 
 DATA:
-$u_a=save("useragent");
-$u_c=save($asu);
+$email=save("email");
+$password=save("password");
 
-function sl($byp=0){if($byp){$r=curl($byp,hmc())[1];}else{$r=curl(host."links",hmc())[1];}
-preg_match("#Just a moment#is",$r,$cf);
-preg_match("#siteUserFullName: '(.*?)<#is",$r,$u);
-preg_match_all('#class="card-title">(.*?)<#is',$r,$host);
-preg_match_all("#(https?:\/\/[a-zA-Z0-9\/-\/.]*)(\/go\/?[a-zA-Z0-9\/-\/.]*)(.*?)#is",$r,$go);
-preg_match_all('#info">([0-9\/0-9]*)(.*?)#is',$r,$left);
-return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"go"=>$go[0],"host"=>$host[1],"left"=>$left[1]];}
 
-function dashboard(){
-$r=curl(host."dashboard",hmc())[1];
-preg_match("#Just a moment#is",$r,$cf);
-preg_match("#siteUserFullName: '(.*?)<#is",$r,$u);
-preg_match_all('#-title text-white">(.*?)<#is',$r,$b);
-return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"balance"=>$b[1][0],"energy"=>$b[1][2]];}
-
-function auto($data=0){if($data){$v="/verify";}
-$r=curl(host."auto".$v,hmc(),$data)[1];
-preg_match("#Just a moment#is",$r,$cf);
-preg_match("#siteUserFullName: '(.*?)<#is",$r,$u);
-preg_match('#token" value="(.*?)"#is',$r,$t);
-preg_match('#let timer = (.*?),#is',$r,$tmr);
-return ["res"=>$r,"cloudflare"=>$cf[0],"username"=>$u[1],"token"=>$t[1],"time"=>$tmr[1]];}
-
-$r=dashboard();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}c().asci(sc).ket("username",$r["username"],"balance",$r["balance"],"energy",$r["energy"]).line();
-
+$r=base_run(host."dashboard");
+if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["logout"]){print h."welcome back! ".p.$r["username"];sleep(2);r();
 menu:
-ket(1,"auto faucet",2,"shorlink",3,"update cookie");
+ket(1,"start",2,"withdraw");
 $pil=tx("number").line();
-if($pil==1){goto auto;}elseif($pil==2){goto shorlink;}elseif($pil==3){unlink($asu);goto DATA;}else{goto menu;}
+if($pil==1){goto dashboard;}elseif($pil==2){goto withdraw;}else{goto menu;}}
 
-auto:
-while(true){$r=auto();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
-if($r["time"]){tmr(2,$r["time"]);
-$r1=auto(http_build_query(["token"=>$r["token"]]))["res"];
-preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1,$s);
-if($s[2]=="Good job!"){print h.$s[2]." ".$s[3].n;line();}}else{lah(1);goto menu;}}
 
-shorlink:
-while(true){$r=sl();
-if($r["cloudflare"]){print m.sc." cloudflare!".n;unlink($asu);goto DATA;}elseif($r["username"]==null){print m.sc." cookie expired!".n;unlink($asu);goto DATA;}
-$re=find($r["host"],$r["go"],$r["left"]);
-if($re["data"]==null){lah();goto menu;}
-$go=curl($re["go"],hmc());
-$link=valid($go[1]);
-if($link==0){goto shorlink;}
-$r1=sl($link)["res"];
-preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r1,$s);
-if($s[2]=="Good job!"){print h.$s[2]." ".$s[3].n;line();}else{print m."invalid key";r();}}
+Login:
+while(true){unlink($asu);
+$r=base_run(host."login");
+$cap=recaptchav3($grecaptcha,$v,host."login");
+$r1=base_run(host."auth/login",http_build_query([$r["t_cs"][1][0]=>$r["t_cs"][2][0],"email"=>$email,"password"=>$password,"captcha"=>"recaptchav3","recaptchav3"=>$cap]));
+if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r1["logout"]){print h."welcome! ".p.$r1["username"].n;sleep(2);goto dashboard;}elseif($r1["notif"][0]=="Invalid Credentials"){unlink($asu).unlink($email).unlink($password);print m.$r1["notif"][0].n;sleep(5);goto DATA;}else{unlink($asu);print m.$r1["notif"][0];r().L(5);}}
+
+
+
+dashboard:$redirect="dashboard";
+$r=base_run(host."dashboard");
+if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["firewall"]){print m.$r["firewall"];r();goto firewall;}elseif($r["logout"]==null){print m.sc." cookie expired!".n;unlink($asu);goto Login;}c().asci(sc).ket($r["email"][1],$r["email"][2],"username",$r["username"],"balance",$r["balance"]).line();
+
+
+ptc:$redirect="ptc";
+while(true){
+$r=base_run(host."ptc");
+if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["firewall"]){print m.$r["firewall"];r();goto firewall;}elseif($r["logout"]==null){print m.sc." cookie expired!".n;unlink($asu);goto Login;}elseif($r["target_ptc"]==0){ket(k.explode("/",host)[2],m."ptc not found","","start faucet").line();L(5);goto claim;}
+$r1=base_run($r["redirect"][0]);tmr(2,$r1["time"]);
+$cap=recaptchav3($grecaptcha,$v,$r1["redirect"][0]);
+$r2=base_run($r1["redirect"][0],http_build_query(["captcha"=>"recaptchav3","recaptchav3"=>$cap,$r1["t_cs"][1][0]=>$r1["t_cs"][2][0]]));
+$s=$r2["notif"];
+if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();
+if($r2["firewall"]){line();print m.$r2["firewall"];r();goto firewall;}}else{print m.$s[0];r();}}
+
+claim:$redirect="claim";
+while(true){
+$r=base_run(host."faucet");
+if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["firewall"]){print m.$r["firewall"];r();goto firewall;}elseif($r["logout"]==null){print m.sc." cookie expired!".n;unlink($asu);goto Login;}elseif($r1["target_ptc"] >= 3){goto ptc;}elseif($r["c_l"]==0){ket(k.explode("/",host)[2],m."claim not found","","start achievements").line();L(5);goto achievements;}elseif($r["time"]){tmr(1,$r["time"]);goto claim;}
+$cap=recaptchav3($grecaptcha,$v,host."faucet");
+$r1=base_run($r["redirect"][0],http_build_query([str_replace('" id="token','',$r["t_cs"][1][0])=>$r["t_cs"][2][0],$r["t_cs"][1][1]=>$r["t_cs"][2][1],"captcha"=>"recaptchav3","recaptchav3"=>$cap]));
+$s=$r1["notif"];
+if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;
+if($r1["firewall"]){line();print m.$r1["firewall"];r();goto firewall;}
+ket("Claim Left",$r1["c_l"]).line();tmr(1,$r1["time"]);}else{print m.$s[0];r();}}
+
+
+achievements:$redirect="achievements";
+while(true){
+$r=base_run(host."achievements");
+if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["firewall"]){print m.$r["firewall"];r();goto firewall;}elseif($r["logout"]==null){print m.sc." cookie expired!".n;unlink($asu);goto Login;}
+for($i=0;$i<20;$i++){if($r["redirect"][$i]==null){
+ket(k.explode("/",host)[2],m."achievements not found","","waiting 24 hour").line();tmr(2,24*60*60);goto dashboard;}
+if($r["target"][1][$i] >= $r["target"][3][$i]){
+$data=http_build_query([$r["t_cs"][1][0]=>$r["t_cs"][2][0]]);
+$r2=base_run($r["redirect"][$i],$data);
+$s=$r2["notif"];
+if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();
+if($r2["firewall"]){line();print m.$r2["firewall"];r();goto firewall;}}}}}
+
+firewall:
+$r=base_run(host."firewall");
+$cap=recaptchav3($grecaptcha,$v,host."firewall");
+$r1=base_run($r["redirect"][0],http_build_query(["recaptchav3"=>$cap,$r["t_cs"][1][0]=>"recaptchav3",$r["t_cs"][1][1]=>$r["t_cs"][2][1]]));
+if($r1["firewall"]==null){print p."bypass firewall successfull".n;line();if($redirect=="dashboard"){goto dashboard;}elseif($redirect=="ptc"){goto ptc;}elseif($redirect=="claim"){goto claim;}elseif($redirect=="achievements"){goto achievements;}elseif($redirect=="withdraw"){goto withdraw;}}else{print m.r1["notif"][0];r();goto firewall;}
+
+withdraw:$redirect="withdraw";
+$r=base_run(host."withdraw");
+if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["firewall"]){print m.$r["firewall"];r();goto firewall;}elseif($r["logout"]==null){print m.sc." cookie expired!".n;unlink($asu);goto Login;}
+$c=$r["requests"];
+for($k=0;$k<10;$k++){if($c[1][$k+3]){ket($k+1,$c[1][$k+3]);}}
+$coi=preg_replace("/[^0-9]/","",tx("number")).line();
+if($coi==0 or $c[1][$coi+2]==null){goto withdraw;}
+if(preg_match("#^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})#is",$r["wallet"][2])){$wallet=$r["wallet"][2];}else{$wallet=tx("email or wallet Faucetpay").line();}ket("wallet",$wallet).line();
+$r1=base_run($r["redirect"][0],http_build_query([$r["t_cs"][1][0]=>$r["t_cs"][2][0],"method"=>$c[2][$coi+2],"amount"=>$r["amount"],$r["wallet"][1]=>$wallet]));
+$s=$r1["notif"];
+if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();if($r1["firewall"]){line();print m.$r1["firewall"];r();goto firewall;}goto dashboard;}else{print m.$s[0].n;L(5);goto withdraw;}
+
+
+function base_run($url,$data=0){
+$r=curlc($url,hac(),$data)[1];
+//print($r);
+//die($r);
+#die(file_put_contents(explode("/",host)[2].".html",$r));
+#$r=file_get_contents(explode("/",host)[2].".html");
+preg_match("#Just a moment#is",$r,$cloudflare);
+preg_match("#logout#is",$r,$logout);
+preg_match("#firewall#is",$r,$firewall);
+preg_match("#siteUserFullName: '(.*?)<#is",$r,$username);
+preg_match('#"card-title text-white">(.*?)<#is',$r,$balance);
+preg_match('#(text-white">)([0-9]*)\/([0-9]*)(.*?)#is',$r,$c_l);
+preg_match_all('#hidden" name="(.*?)" value="(.*?)"#',$r,$t_cs);
+preg_match('#(let|var*) (timer|wait*)( = *)([0-9]*)#is',$r,$time);
+preg_match("#Swal.fire(.*?)'(.*?)', '(.*?)', '#is",$r,$n_r);
+preg_match('#amation-circle"></i> (.*?)<#is',$r,$n_c);
+preg_match('#purple ms-auto">(.*?)<#is',$r,$target_ptc);
+preg_match_all("#(https?:\/\/[a-z\/.]*)(verify|view|achievements\/claim|w\/withdraw*)(\/?[a-z0-9\/]*)(.*?)#is",$r,$redirect);
+preg_match_all('#aria-valuemax="100">([0-9]*)([ \/]*)([0-9]*)(.*?)#is',$r,$target);
+preg_match_all('#{"text":"(.*?)","value":"(.*?)",#',$r,$requests);
+
+preg_match('#type="text" name="(.*?)" class="form-control" value="(.*?)"#is',$r,$wallet);
+preg_match('#" max="(.*?)"#is',$r,$amount);
+#print_r($cp);
+#die(print_r($redirect));
+return ["res"=>$r,"cloudflare"=>$cloudflare[0],"logout"=>$logout[0],"firewall"=>$firewall[0],"username"=>$username[1],"balance"=>$balance[1],"t_cs"=>$t_cs,"time"=>$time[4],"notif"=>[$n_c[1],$n_r],"target_ptc"=>$target_ptc[1],"redirect"=>$redirect[0],"c_l"=>$c_l[2],"target"=>$target,"requests"=>$requests,"wallet"=>$wallet,"amount"=>$amount[1]];}
+
+
