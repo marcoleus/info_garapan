@@ -83,15 +83,14 @@ if($r1["firewall"]==null){print p."bypass firewall successfull".n;line();if($red
 withdraw:$redirect="withdraw";
 $r=base_run(host."withdraw");
 if($r["cloudflare"]){unlink($asu);die(m.sc." cloudflare!".n);}elseif($r["firewall"]){print m.$r["firewall"];r();goto firewall;}elseif($r["logout"]==null){print m.sc." cookie expired!".n;unlink($asu);goto Login;}
-$c=$r["requests"];
-for($k=0;$k<10;$k++){if($c[1][$k+3]){ket($k+1,$c[1][$k+3]);}}
-$coi=preg_replace("/[^0-9]/","",tx("number")).line();
-if($coi==0 or $c[1][$coi+2]==null){goto withdraw;}
+$requests=$r["requests"];
+for($k=0;$k<5;$k++){if($requests[$k]->text){ket($k+1,$requests[$k]->text);}}
+$coi=tx("number").line();
+if($requests[$coi-1]->text==null){goto withdraw;}
 if(preg_match("#^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})#is",$r["wallet"][2])){$wallet=$r["wallet"][2];}else{$wallet=tx("email or wallet Faucetpay").line();}ket("wallet",$wallet).line();
-$r1=base_run($r["redirect"][0],http_build_query([$r["t_cs"][1][0]=>$r["t_cs"][2][0],"method"=>$c[2][$coi+2],"amount"=>$r["amount"],$r["wallet"][1]=>$wallet]));
+$r1=base_run($r["redirect"][0],http_build_query([$r["t_cs"][1][0]=>$r["t_cs"][2][0],"method"=>$requests[$coi-1]->value,"amount"=>$r["amount"],$r["wallet"][1]=>$wallet]));
 $s=$r1["notif"];
 if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line();if($r1["firewall"]){line();print m.$r1["firewall"];r();goto firewall;}goto dashboard;}else{print m.$s[0].n;L(5);goto withdraw;}
-
 
 function base_run($url,$data=0){
 $r=curlc($url,hac(),$data)[1];
