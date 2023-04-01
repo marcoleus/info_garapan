@@ -58,7 +58,7 @@ $r1=base_run($r["redirect"][0],http_build_query([str_replace('" id="token','',$r
 $s=$r1["notif"];
 if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;
 if($r1["firewall"]){line();print m.$r1["firewall"];r();goto firewall;}
-ket("Claim Left",$r1["c_l"]).line();tmr(1,$r1["time"]);}else{print m.$s[0];r();}}
+ket("Claim Left",$r1["c_l"]).line();tmr(1,$r1["time"]);}else{print m.$s[0];r();tmr(2,20*60);}}
 
 
 achievements:$redirect="achievements";
