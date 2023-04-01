@@ -111,12 +111,9 @@ preg_match('#amation-circle"></i> (.*?)<#is',$r,$n_c);
 preg_match('#purple ms-auto">(.*?)<#is',$r,$target_ptc);
 preg_match_all("#(https?:\/\/[a-z\/.]*)(verify|view|achievements\/claim|w\/withdraw*)(\/?[a-z0-9\/]*)(.*?)#is",$r,$redirect);
 preg_match_all('#aria-valuemax="100">([0-9]*)([ \/]*)([0-9]*)(.*?)#is',$r,$target);
-preg_match_all('#{"text":"(.*?)","value":"(.*?)",#',$r,$requests);
-
+preg_match('#var fpCurrencies = (.*?);#',$r,$requests);
 preg_match('#type="text" name="(.*?)" class="form-control" value="(.*?)"#is',$r,$wallet);
 preg_match('#" max="(.*?)"#is',$r,$amount);
 #print_r($cp);
-#die(print_r($redirect));
-return ["res"=>$r,"cloudflare"=>$cloudflare[0],"logout"=>$logout[0],"firewall"=>$firewall[0],"username"=>$username[1],"balance"=>$balance[1],"t_cs"=>$t_cs,"time"=>$time[4],"notif"=>[$n_c[1],$n_r],"target_ptc"=>$target_ptc[1],"redirect"=>$redirect[0],"c_l"=>$c_l[2],"target"=>$target,"requests"=>$requests,"wallet"=>$wallet,"amount"=>$amount[1]];}
-
-
+#die(print_r($requests[1]));
+return ["res"=>$r,"cloudflare"=>$cloudflare[0],"logout"=>$logout[0],"firewall"=>$firewall[0],"username"=>$username[1],"balance"=>$balance[1],"t_cs"=>$t_cs,"time"=>$time[4],"notif"=>[$n_c[1],$n_r],"target_ptc"=>$target_ptc[1],"redirect"=>$redirect[0],"c_l"=>$c_l[2],"target"=>$target,"requests"=>json_decode($requests[1]),"wallet"=>$wallet,"amount"=>$amount[1]];}
