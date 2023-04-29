@@ -104,7 +104,7 @@ if($s[1][2]=="Good job!"){print h.$s[1][2];r();print h.$s[1][3].n;line().ket("ba
 
 
 function base_run($url,$data=0){
-$r=curl($url,hmc(),$data)[1];
+$r=curl($url,hmc(),$data,true,false)[1];
 //die(file_put_contents("zzzzzzzzzzzzzz",$r));
 preg_match("#Just a moment#is",$r,$cloudflare);
 preg_match("#Wait until your timer ends#is",$r,$wait);
